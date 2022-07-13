@@ -13,3 +13,5 @@ conan install .. --build=missing
 2. [Conan Getting Started](https://docs.conan.io/en/latest/getting_started.html)
 
 3. [google/glog](https://github.com/google/glog.git)
+
+4. [Unicode](https://en.cppreference.com/w/cpp/string/basic_string)

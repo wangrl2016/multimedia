@@ -12,6 +12,7 @@ set(TUTORIALS
         tutorials/cmake_introduction.cc
         tutorials/conan_getting_started.cc
         tutorials/google_glog.cc
+        tutorials/unicode.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
