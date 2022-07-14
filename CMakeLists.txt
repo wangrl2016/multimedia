@@ -13,6 +13,7 @@ set(TUTORIALS
         tutorials/conan_getting_started.cc
         tutorials/google_glog.cc
         tutorials/unicode_org_icu.cc
+        tutorials/singly_linked_list.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
