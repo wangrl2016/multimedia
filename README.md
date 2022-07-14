@@ -14,4 +14,5 @@ conan install .. --build=missing
 
 3. [google/glog](https://github.com/google/glog.git)
 
-4. [Unicode](https://en.cppreference.com/w/cpp/string/basic_string)
+4. [unicode-org/icu](https://github.com/unicode-org/icu.git)
+

@@ -1,6 +1,7 @@
 [requires]
 poco/1.12.0
 glog/0.6.0
+icu/71.1
 
 [generators]
 cmake
