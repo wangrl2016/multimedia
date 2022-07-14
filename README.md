@@ -16,3 +16,5 @@ conan install .. --build=missing
 
 4. [unicode-org/icu](https://github.com/unicode-org/icu.git)
 
+5. [Python Basic](https://www.python.org)
+

@@ -1,3 +1,6 @@
+# Temporary dir for download
+temp/
+
 # Build directories
 cmake-build-debug/
 cmake-build-release/
