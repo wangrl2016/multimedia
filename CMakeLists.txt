@@ -8,6 +8,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+# library
+add_library(multimedia
+        base/containers/queue.cc
+        )
+
 # tutorials
 set(TUTORIALS
         tutorials/cmake_introduction.cc
@@ -29,6 +36,7 @@ endforeach ()
 enable_testing()
 
 add_executable(multimedia_test
+        base/containers/queue_unittest.cc
         tutorials/google_unittest.cc
         )
 target_link_libraries(
