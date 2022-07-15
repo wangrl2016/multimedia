@@ -87,6 +87,14 @@ public:
         LOG(INFO) << __FUNCTION__;
     }
 
+    void Init(std::vector<std::shared_ptr<Student>> students) {
+        students_ = std::move(students);
+    }
+
+    size_t Size() {
+        return students_.size();
+    }
+
     void PushBack(const std::shared_ptr<Student>& student) {
         students_.push_back(student);
     }
@@ -131,6 +139,15 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
         LOG(INFO) << "Size " << class2.size();
         class3 = class2;
         LOG(INFO) << "Size " << class3.size();
+    }
+
+    {
+        std::vector<std::shared_ptr<Student>> class4;
+        class4.push_back(std::make_shared<Student>(19, 9));
+        Class class5;
+        class5.Init(class4);
+        LOG(INFO) << "Size " << class4.size();
+        LOG(INFO) << "Size " << class5.Size();
     }
 
     return 0;
