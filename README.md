@@ -17,5 +17,4 @@ conan install .. --build=missing
 7. [google/googletest](https://github.com/google/googletest.git)
 8. [Queue](https://en.cppreference.com/w/cpp/container/queue)
 9. [Constructor](https://en.cppreference.com/w/cpp/language/constructor)
-10. [Function](https://cplusplus.com/doc/tutorial/functions/)
 

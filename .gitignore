@@ -1,6 +1,3 @@
-# External files
-build/build_config.h
-build/buildflag.h
 
 # Temporary dir for download
 temp/
