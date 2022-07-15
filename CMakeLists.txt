@@ -23,6 +23,7 @@ set(TUTORIALS
         tutorials/unicode_org_icu.cc
         tutorials/singly_linked_list.cc
         # tutorials/google_test.cc
+        tutorials/constructor.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
