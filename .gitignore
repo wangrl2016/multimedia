@@ -1,4 +1,6 @@
 
+bindings/
+
 # Temporary dir for download
 temp/
 

@@ -9,10 +9,13 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/bindings/)
 
 # library
 add_library(multimedia
         base/containers/queue.cc
+        bindings/imgui_impl_glfw.cpp
+        bindings/imgui_impl_opengl3.cpp
         )
 
 # tutorials
@@ -24,6 +27,7 @@ set(TUTORIALS
         tutorials/singly_linked_list.cc
         # tutorials/google_test.cc
         tutorials/constructor.cc
+        tutorials/ocornut_imgui.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
