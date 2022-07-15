@@ -5,6 +5,7 @@ icu/71.1
 gtest/1.11.0
 imgui/1.88
 glfw/3.3.7
+ffmpeg/5.0
 
 [generators]
 cmake
