@@ -8,12 +8,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+# tutorials
 set(TUTORIALS
         tutorials/cmake_introduction.cc
         tutorials/conan_getting_started.cc
         tutorials/google_glog.cc
         tutorials/unicode_org_icu.cc
         tutorials/singly_linked_list.cc
+        # tutorials/google_test.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
@@ -22,3 +24,17 @@ foreach (TUTORIAL ${TUTORIALS})
     add_executable(${EXE} ${TUTORIAL})
     target_link_libraries(${EXE} ${CONAN_LIBS})
 endforeach ()
+
+# google tests
+enable_testing()
+
+add_executable(multimedia_test
+        tutorials/google_unittest.cc
+        )
+target_link_libraries(
+        multimedia_test
+        ${CONAN_LIBS}
+)
+
+include(GoogleTest)
+gtest_discover_tests(multimedia_test)
