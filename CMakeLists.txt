@@ -29,6 +29,7 @@ set(TUTORIALS
         tutorials/constructor.cc
         tutorials/ocornut_imgui.cc
         tutorials/decode_audio.cc
+        tutorials/encode_audio.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
