@@ -29,7 +29,7 @@ foreach (TUTORIAL ${TUTORIALS})
     string(REGEX MATCHALL "[0-9A-Za-z_]*.cc" temp ${TUTORIAL})
     string(REGEX REPLACE ".cc" "" EXE ${temp})
     add_executable(${EXE} ${TUTORIAL})
-    target_link_libraries(${EXE} ${CONAN_LIBS})
+    target_link_libraries(${EXE} multimedia ${CONAN_LIBS})
 endforeach ()
 
 # google tests
@@ -41,6 +41,7 @@ add_executable(multimedia_test
         )
 target_link_libraries(
         multimedia_test
+        multimedia
         ${CONAN_LIBS}
 )
 
