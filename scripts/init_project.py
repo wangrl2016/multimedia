@@ -7,6 +7,7 @@ temp_dir = 'temp'
 
 res_urls = [
     'https://filesamples.com/samples/audio/mp2/sample1.mp2',
+    'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
 ]
 
 if __name__ == '__main__':

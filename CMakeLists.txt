@@ -16,6 +16,7 @@ add_library(multimedia
         base/containers/queue.cc
         bindings/imgui_impl_glfw.cpp
         bindings/imgui_impl_opengl3.cpp
+        media/ffmpeg/ffmpeg_util.cc
         )
 
 # tutorials
@@ -30,6 +31,7 @@ set(TUTORIALS
         tutorials/ocornut_imgui.cc
         tutorials/decode_audio.cc
         tutorials/encode_audio.cc
+        tutorials/demux_decode.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
