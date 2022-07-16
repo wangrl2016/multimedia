@@ -31,6 +31,7 @@ set(TUTORIALS
         tutorials/ocornut_imgui.cc
         tutorials/decode_audio.cc
         tutorials/encode_audio.cc
+        tutorials/decode_video.cc
         tutorials/demux_decode.cc
         )
 
