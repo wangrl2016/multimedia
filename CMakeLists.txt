@@ -34,6 +34,7 @@ set(TUTORIALS
         tutorials/decode_video.cc
         tutorials/encode_video.cc
         tutorials/demux_decode.cc
+        tutorials/encode_mux.cc
         )
 
 foreach (TUTORIAL ${TUTORIALS})
