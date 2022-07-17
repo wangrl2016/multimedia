@@ -24,3 +24,4 @@ conan install .. --build=missing
 14. [Encode Video](https://ffmpeg.org/doxygen/trunk/encode_video_8c-example.html)
 15. [Demux Decode](https://ffmpeg.org/doxygen/trunk/demuxing_decoding_8c-example.html)
 16. [Encode Mux](https://ffmpeg.org/doxygen/trunk/muxing_8c-example.html)
+17. [Transcode AAC](https://ffmpeg.org/doxygen/trunk/transcode_aac_8c-example.html)
