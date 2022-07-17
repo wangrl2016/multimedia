@@ -32,6 +32,7 @@ set(TUTORIALS
         tutorials/decode_audio.cc
         tutorials/encode_audio.cc
         tutorials/decode_video.cc
+        tutorials/encode_video.cc
         tutorials/demux_decode.cc
         )
 
