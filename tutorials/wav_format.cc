@@ -7,13 +7,14 @@
 #include <glog/logging.h>
 
 int main(int argc, char* argv[]) {
+    // Initialize Google’s logging library.
+    google::InitGoogleLogging(argv[0]);
+    FLAGS_stderrthreshold = google::GLOG_INFO;
+
     if (argc != 3) {
         LOG(INFO) << "Usage: " << argv[0] << " input_file output_file";
         return 1;
     }
-    // Initialize Google’s logging library.
-    google::InitGoogleLogging(argv[0]);
-    FLAGS_stderrthreshold = google::GLOG_INFO;
 
     size_t data_size = std::filesystem::file_size(argv[1]);
     LOG(INFO) << "data_size " << data_size << " bytes";
