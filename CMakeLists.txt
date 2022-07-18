@@ -53,6 +53,7 @@ enable_testing()
 
 add_executable(multimedia_test
         base/containers/queue_unittest.cc
+        media/base/audio_sample_types_unittest.cc
         tutorials/google_unittest.cc
         )
 target_link_libraries(

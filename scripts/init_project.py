@@ -16,6 +16,7 @@ if __name__ == '__main__':
         os.makedirs(temp_dir)
     for url in res_urls:
         filename = url.split('/')[-1]
+        print(filename)
         url_path = os.path.join(os.getcwd(), os.path.join(temp_dir, filename))
         if not os.path.exists(url_path):
             r = requests.get(url, allow_redirects=True)
