@@ -51,7 +51,7 @@ namespace mm {
                                     << "Expected " << n << " to be " << (n >> j) << " aligned";
 
                 // Also, n - 1 should not be aligned on ANY lower power of two except 1
-                // (but since we're starting from i - 1 we don't test that case here.
+                // (but since we're starting from i - 1 we don't test that case here).
                 EXPECT_FALSE(IsAligned(n - 1, n >> j))
                                     << "Expected " << (n - 1) << " to NOT be " << (n >> j) << " aligned";
             }
