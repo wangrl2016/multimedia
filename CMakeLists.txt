@@ -38,9 +38,11 @@ set(TUTORIALS
         tutorials/demux_decode.cc
         tutorials/encode_mux.cc
         tutorials/transcode_aac.cc
-        tutorials/resample_audio.cc
-        tutorials/time_stretch.cc
         tutorials/wav_format.cc
+        tutorials/resample_audio.cc
+        tutorials/memory_read.cc
+        tutorials/time_stretch.cc
+
         )
 
 foreach (TUTORIAL ${TUTORIALS})
