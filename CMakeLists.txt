@@ -14,6 +14,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/bindings/)
 # library
 add_library(multimedia
         base/containers/queue.cc
+        base/memory/aligned_memory.cc
         bindings/imgui_impl_glfw.cpp
         bindings/imgui_impl_opengl3.cpp
         media/ffmpeg/ffmpeg_util.cc
@@ -53,6 +54,7 @@ enable_testing()
 
 add_executable(multimedia_test
         base/containers/queue_unittest.cc
+        base/memory/aligned_memory_unittest.cc
         media/base/audio_sample_types_unittest.cc
         tutorials/google_unittest.cc
         )

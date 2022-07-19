@@ -2,6 +2,10 @@
 // Created by wangrl2016 on 2022/7/18.
 //
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma ide diagnostic ignored "OCUnusedTypeAliasInspection"
+
 #ifndef MULTIMEDIA_AUDIO_SAMPLE_TYPES_H
 #define MULTIMEDIA_AUDIO_SAMPLE_TYPES_H
 
@@ -259,3 +263,5 @@ namespace mm {
 }
 
 #endif //MULTIMEDIA_AUDIO_SAMPLE_TYPES_H
+
+#pragma clang diagnostic pop
