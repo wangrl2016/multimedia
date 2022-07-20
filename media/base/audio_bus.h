@@ -10,6 +10,13 @@
 #include "base/memory/aligned_memory.h"
 
 namespace mm {
+    // Represents a sequence of audio frames containing frames() audio samples for
+    // each of channels() channels. The data is stored as a set of contiguous
+    // float arrays with one array per channel. The memory for the arrays is either
+    // allocated and owned by the AudioBus or it is provided to one of the factory
+    // methods. AudioBus guarantees that it allocates memory such that float array
+    // for each channel is aligned by AudioBus::kChannelAlignment bytes, and it
+    // requires the same for memory passed to its Wrap...() factory methods.
     class AudioBus {
     public:
         // Guaranteed alignment of each channel's data; use 16-byte alignment for easy
