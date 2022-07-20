@@ -3,6 +3,7 @@
 //
 
 #include "media/base/audio_bus.h"
+#include "media/base/audio_sample_types.h"
 
 namespace mm {
     static bool IsAligned(void* ptr) {
@@ -49,6 +50,114 @@ namespace mm {
         return std::unique_ptr<AudioBus>(new AudioBus(channels, frames));
     }
 
+    std::unique_ptr<AudioBus> AudioBus::WrapVector(int frames,
+                                                   const std::vector<float*>& channel_data) {
+        return std::unique_ptr<AudioBus>(new AudioBus(frames, channel_data));
+    }
+
+    std::unique_ptr<AudioBus> AudioBus::WrapMemory(int channels,
+                                                   int frames,
+                                                   void* data) {
+        // |data| must be aligned by AudioBus::kChannelAlignment.
+        CHECK(IsAligned(data));
+        return std::unique_ptr<AudioBus>(new AudioBus(channels, frames, static_cast<float*>(data)));
+    }
+
+    std::unique_ptr<AudioBus> AudioBus::WrapReadOnlyMemory(int channels,
+                                                           int frames,
+                                                           const void* data) {
+        // Note: const_cast is generally dangerous but is used in this case since
+        // AudioBus accommodates both read-only and read/write use cases. A const
+        // AudioBus object is returned to ensure no one accidentally writes to the
+        // read-only data.
+        return WrapMemory(channels, frames, const_cast<void*>(data));
+    }
+
+    int AudioBus::CalculateMemorySize(int channels, int frames) {
+        return CalculateMemorySizeInternal(channels, frames, nullptr);
+    }
+
+    void AudioBus::CopyTo(AudioBus* dest) const {
+        CopyPartialFramesTo(0, frames(), 0, dest);
+    }
+
+    void AudioBus::CopyAndClipTo(AudioBus* dest) const {
+        CHECK_EQ(channels(), dest->channels());
+        CHECK_LE(frames(), dest->frames());
+        for (int i = 0; i < channels(); i++) {
+            float* dest_ptr = dest->channel(i);
+            const float* source_ptr = channel(i);
+            for (int j = 0; j < frames(); j++)
+                dest_ptr[j] = Float32SampleTypeTraits::FromFloat(source_ptr[j]);
+        }
+    }
+
+    void AudioBus::CopyPartialFramesTo(int source_start_frame,
+                                       int frame_count,
+                                       int dest_start_frame,
+                                       AudioBus* dest) const {
+        CHECK_EQ(channels(), dest->channels());
+        CHECK_LE(source_start_frame + frame_count, frames());
+        CHECK_LE(dest_start_frame + frame_count, dest->frames());
+
+        // Since we don't know if the other AudioBus is wrapped or not (and we don't
+        // want to care), just copy using the public channel() accessors.
+        for (int i = 0; i < channels(); ++i) {
+            memcpy(dest->channel(i) + dest_start_frame,
+                   channel(i) + source_start_frame,
+                   sizeof(*channel(i)) * frame_count);
+        }
+    }
+
+    void AudioBus::Zero() {
+        ZeroFrames(frames_);
+    }
+
+    void AudioBus::ZeroFrames(int frames) {
+        ZeroFramesPartial(0, frames);
+    }
+
+    void AudioBus::ZeroFramesPartial(int start_frame, int frames) {
+        CheckOverflow(start_frame, frames, frames_);
+        if (frames <= 0)
+            return;
+
+        for (size_t i = 0; i < channel_data_.size(); ++i) {
+            memset(channel_data_[i] + start_frame, 0,
+                   frames * sizeof(*channel_data_[i]));
+        }
+    }
+
+    bool AudioBus::AreFramesZero() const {
+        for (size_t i = 0; i < channel_data_.size(); ++i) {
+            for (int j = 0; j < frames_; ++j) {
+                if (channel_data_[i][j])
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    void AudioBus::Scale(float volume) {
+        if (volume > 0 && volume != 1) {
+            for (int i = 0; i < channels(); i++) {
+                // TODO: Use SSE or NEON accelerate
+                float* data = channel(i);
+                for (int j = 0; j < frames(); j++)
+                    data[j] = data[j] * volume;
+            }
+        } else if (volume == 0) {
+            Zero();
+        }
+    }
+
+    void AudioBus::SwapChannels(int a, int b) {
+        DCHECK(a < channels() && a >= 0);
+        DCHECK(b < channels() && b >= 0);
+        DCHECK_NE(a, b);
+        std::swap(channel_data_[a], channel_data_[b]);
+    }
+
     AudioBus::AudioBus(int channels, int frames) : frames_(frames) {
         ValidateConfig(channels, frames_);
 
@@ -76,7 +185,7 @@ namespace mm {
             channel_data_(channel_data), frames_(frames) {
 
         // Sanity check wrapped vector for alignment and channel count.
-        for (auto & i : channel_data_)
+        for (auto& i: channel_data_)
             DCHECK(IsAligned(i));
     }
 

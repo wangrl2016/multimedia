@@ -129,7 +129,7 @@ namespace mm {
         // is provided, no adjustment is done.
         void Scale(float volume);
 
-        // Swaps channels identified by |a| and |b|.  The caller needs to make sure
+        // Swap channels identified by |a| and |b|.  The caller needs to make sure
         // the channels are valid.
         void SwapChannels(int a, int b);
 
