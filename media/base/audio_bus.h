@@ -42,9 +42,9 @@ namespace mm {
                                                     int frames,
                                                     void* data);
 
-        static std::unique_ptr<AudioBus> WrapReadOnlyMemory(int channels,
-                                                            int frames,
-                                                            const void* data);
+        [[maybe_unused]] static std::unique_ptr<AudioBus> WrapReadOnlyMemory(int channels,
+                                                                             int frames,
+                                                                             const void* data);
 
         // Based on the given number of channels and frames, calculate the minimum
         // required size in bytes of a contiguous block of memory to be passed to
@@ -63,7 +63,7 @@ namespace mm {
         // undefined behavior.
         template<class SourceSampleTypeTraits>
         void FromInterleaved(
-                const typename SourceSampleTypeTraits::Valuetype* source_buffer,
+                const typename SourceSampleTypeTraits::ValueType* source_buffer,
                 int num_frames_to_write);
 
         // Similar to FromInterleaved...(), but overwrites the frames starting at a
@@ -114,13 +114,13 @@ namespace mm {
         // inf, nan, or between [-1.0, 1.0]) values in the channel data.
         float* channel(int channel) { return channel_data_[channel]; }
 
-        const float* channel(int channel) const { return channel_data_[channel]; }
+        [[nodiscard]] const float* channel(int channel) const { return channel_data_[channel]; }
 
         // Returns the number of channels.
-        int channels() const { return static_cast<int>(channel_data_.size()); }
+        [[nodiscard]] int channels() const { return static_cast<int>(channel_data_.size()); }
 
         // Returns the number of frames.
-        int frames() const { return frames_; }
+        [[nodiscard]] int frames() const { return frames_; }
 
         // Helper method for zeroing out all channels of audio data.
         void Zero();
@@ -130,7 +130,7 @@ namespace mm {
         void ZeroFramesPartial(int start_frame, int frames);
 
         // Checks if all frames are zero.
-        bool AreFramesZero() const;
+        [[nodiscard]] bool AreFramesZero() const;
 
         // Scale internal channel values by |volume| >= 0.  If an invalid value
         // is provided, no adjustment is done.
@@ -138,7 +138,7 @@ namespace mm {
 
         // Swap channels identified by |a| and |b|.  The caller needs to make sure
         // the channels are valid.
-        void SwapChannels(int a, int b);
+        [[maybe_unused]] void SwapChannels(int a, int b);
 
         AudioBus(const AudioBus&) = delete;
 
@@ -185,7 +185,7 @@ namespace mm {
 
     // Delegates to FromInterleavedPartial().
     template<class SourceSampleTypeTraits>
-    void AudioBus::FromInterleaved(const typename SourceSampleTypeTraits::Valuetype* source_buffer,
+    void AudioBus::FromInterleaved(const typename SourceSampleTypeTraits::ValueType* source_buffer,
                                    int num_frames_to_write) {
         FromInterleavedPartial<SourceSampleTypeTraits>(source_buffer, 0, num_frames_to_write);
         // Zero any remaining frames.

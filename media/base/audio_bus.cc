@@ -2,6 +2,10 @@
 // Created by wangrl2016 on 2022/7/19.
 //
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-pass-by-value"
+#pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
+
 #include "media/base/audio_bus.h"
 #include "media/base/audio_sample_types.h"
 
@@ -63,7 +67,7 @@ namespace mm {
         return std::unique_ptr<AudioBus>(new AudioBus(channels, frames, static_cast<float*>(data)));
     }
 
-    std::unique_ptr<AudioBus> AudioBus::WrapReadOnlyMemory(int channels,
+    [[maybe_unused]] std::unique_ptr<AudioBus> AudioBus::WrapReadOnlyMemory(int channels,
                                                            int frames,
                                                            const void* data) {
         // Note: const_cast is generally dangerous but is used in this case since
@@ -122,16 +126,16 @@ namespace mm {
         if (frames <= 0)
             return;
 
-        for (size_t i = 0; i < channel_data_.size(); ++i) {
-            memset(channel_data_[i] + start_frame, 0,
-                   frames * sizeof(*channel_data_[i]));
+        for (auto & i : channel_data_) {
+            memset(i + start_frame, 0,
+                   frames * sizeof(*i));
         }
     }
 
     bool AudioBus::AreFramesZero() const {
-        for (size_t i = 0; i < channel_data_.size(); ++i) {
+        for (auto i : channel_data_) {
             for (int j = 0; j < frames_; ++j) {
-                if (channel_data_[i][j])
+                if (i[j])
                     return false;
             }
         }
@@ -151,7 +155,7 @@ namespace mm {
         }
     }
 
-    void AudioBus::SwapChannels(int a, int b) {
+    [[maybe_unused]] void AudioBus::SwapChannels(int a, int b) {
         DCHECK(a < channels() && a >= 0);
         DCHECK(b < channels() && b >= 0);
         DCHECK_NE(a, b);
@@ -198,3 +202,5 @@ namespace mm {
             channel_data_.push_back(data + i * aligned_frame);
     }
 } // mm
+
+#pragma clang diagnostic pop

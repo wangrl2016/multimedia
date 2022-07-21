@@ -5,6 +5,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "OCUnusedTypeAliasInspection"
+#pragma ide diagnostic ignored "Simplify"
 
 #ifndef MULTIMEDIA_AUDIO_SAMPLE_TYPES_H
 #define MULTIMEDIA_AUDIO_SAMPLE_TYPES_H
@@ -67,7 +68,7 @@ namespace mm {
         static SampleType From(FloatType source_value) {
             // Apply clipping (aka. clamping). These values are frequently sent to OS
             // level drivers that may not properly handle these values.
-            if (source_value <= kMinValue)
+            if (!(source_value > kMinValue))
                 return kMinValue;
             if (source_value >= kMaxValue)
                 return kMaxValue;
