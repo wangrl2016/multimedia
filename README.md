@@ -9,6 +9,7 @@ conan install .. --build=missing
 ### MultiMedia
 
 1. AudioBus: Represents a sequence of audio frames.
+2. AudioFileReader: Decode audio form Memory.
 
 ### Tutorials
 

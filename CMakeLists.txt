@@ -18,7 +18,11 @@ add_library(multimedia
         bindings/imgui_impl_glfw.cpp
         bindings/imgui_impl_opengl3.cpp
         media/base/audio_bus.cc
+        media/ffmpeg/ffmpeg_deleters.cc
         media/ffmpeg/ffmpeg_util.cc
+        media/filters/audio_file_reader.cc
+        media/filters/ffmpeg_glue.cc
+        media/filters/memory_protocol.cc
         )
 
 # tutorials
@@ -60,6 +64,7 @@ add_executable(multimedia_test
         base/memory/aligned_memory_unittest.cc
         media/base/audio_bus_unittest.cc
         media/base/audio_sample_types_unittest.cc
+        media/filters/memory_protocol_unittest.cc
         tutorials/google_unittest.cc
         )
 target_link_libraries(
