@@ -10,6 +10,8 @@ conan install .. --build=missing
 
 1. AudioBus: Represents a sequence of audio frames.
 2. AudioFileReader: Decode audio form Memory.
+3. DetermineContainer: determine the container name from the buffer provided.
+4. BitReader: Read bits from buffer.
 
 ### Tutorials
 
