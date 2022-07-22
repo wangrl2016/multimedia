@@ -18,6 +18,7 @@ add_library(multimedia
         bindings/imgui_impl_glfw.cpp
         bindings/imgui_impl_opengl3.cpp
         media/base/audio_bus.cc
+        media/base/container_names.cc
         media/ffmpeg/ffmpeg_deleters.cc
         media/ffmpeg/ffmpeg_util.cc
         media/filters/audio_file_reader.cc
