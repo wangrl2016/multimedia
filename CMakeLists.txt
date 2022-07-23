@@ -67,6 +67,7 @@ add_executable(multimedia_test
         base/memory/aligned_memory_unittest.cc
         media/base/audio_bus_unittest.cc
         media/base/audio_sample_types_unittest.cc
+        media/base/bit_reader_unittest.cc
         media/filters/memory_protocol_unittest.cc
         tutorials/google_unittest.cc
         )

@@ -118,6 +118,8 @@ namespace mm {
                     return CONTAINER_WEBM;
                 break;
         }
+
+        return CONTAINER_UNKNOWN;
     }
 
     MediaContainerName DetermineContainer(const uint8_t* buffer,
