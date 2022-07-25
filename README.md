@@ -41,4 +41,5 @@ conan install .. --build=missing
 ### References
 
 1. [Algorithms 4th Edition](https://algs4.cs.princeton.edu/home/)
+2. [Computer Systems: A Programmer's Perspective, 3/E](https://csapp.cs.cmu.edu)
 
